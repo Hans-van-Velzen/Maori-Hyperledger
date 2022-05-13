@@ -1,0 +1,49 @@
+{
+    "name": "test-network-Waka-district1",
+    "version": "1.0.0",
+    "client": {
+        "organization": "Waka-district1",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                }
+            }
+        }
+    },
+    "organizations": {
+        "Waka-district1": {
+            "mspid": "Waka-district1MSP",
+            "peers": [
+                "peer0.Waka-district1.example.com"
+            ],
+            "certificateAuthorities": [
+                "ca.Waka-district1.example.com"
+            ]
+        }
+    },
+    "peers": {
+        "peer0.Waka-district1.example.com": {
+            "url": "grpcs://localhost:7051",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICVzCCAf2gAwIBAgIQTl9BEITtWJjbzNP2tvXamzAKBggqhkjOPQQDAjB2MQsw\nCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy\nYW5jaXNjbzEZMBcGA1UEChMQb3JnMS5leGFtcGxlLmNvbTEfMB0GA1UEAxMWdGxz\nY2Eub3JnMS5leGFtcGxlLmNvbTAeFw0yMjA1MTMwMzQxMDBaFw0zMjA1MTAwMzQx\nMDBaMHYxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQH\nEw1TYW4gRnJhbmNpc2NvMRkwFwYDVQQKExBvcmcxLmV4YW1wbGUuY29tMR8wHQYD\nVQQDExZ0bHNjYS5vcmcxLmV4YW1wbGUuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0D\nAQcDQgAE+M014G0dQ5JNAPLpL0FwcDO7wy2u1ySQCKuYEkB9ZpeWF0kyTRCt9Z/a\nkabZz27cOuY9hZXLoR8EUJsnzw9ZNaNtMGswDgYDVR0PAQH/BAQDAgGmMB0GA1Ud\nJQQWMBQGCCsGAQUFBwMCBggrBgEFBQcDATAPBgNVHRMBAf8EBTADAQH/MCkGA1Ud\nDgQiBCC6rFDC1CXuCL2SpA5rOOYaPsK6MvpJeAk/qylG2BBT5DAKBggqhkjOPQQD\nAgNIADBFAiEAgd/KQ2vw+1iOsIphRz5S5W3yMJ39y455mgjzP2qspU0CIEea4cYa\nttjk6nvz88Uzt4S7Y1rPBbSAGcl4//+Ub+Iu\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.Waka-district1.example.com",
+                "hostnameOverride": "peer0.Waka-district1.example.com"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca.Waka-district1.example.com": {
+            "url": "https://localhost:7054",
+            "caName": "ca-Waka-district1",
+            "tlsCACerts": {
+                "pem": ["-----BEGIN CERTIFICATE-----\nMIICUzCCAfigAwIBAgIRAKKSDVqTsvybeQyAexqP1w4wCgYIKoZIzj0EAwIwczEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xGTAXBgNVBAoTEG9yZzEuZXhhbXBsZS5jb20xHDAaBgNVBAMTE2Nh\nLm9yZzEuZXhhbXBsZS5jb20wHhcNMjIwNTEzMDM0MTAwWhcNMzIwNTEwMDM0MTAw\nWjBzMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMN\nU2FuIEZyYW5jaXNjbzEZMBcGA1UEChMQb3JnMS5leGFtcGxlLmNvbTEcMBoGA1UE\nAxMTY2Eub3JnMS5leGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IA\nBAa8zNWr4LYF/g9wynkRSSEaM91djvKCtielLiYw3HNOO0pouT1CFmcQrCIWeuuw\naT43xdz0m9pwkt+OGtB8e4CjbTBrMA4GA1UdDwEB/wQEAwIBpjAdBgNVHSUEFjAU\nBggrBgEFBQcDAgYIKwYBBQUHAwEwDwYDVR0TAQH/BAUwAwEB/zApBgNVHQ4EIgQg\nEfMzV60WczWyE3Ng0ZxcxqKl/wHrmK6SvXGKn/Z0N24wCgYIKoZIzj0EAwIDSQAw\nRgIhAMLNAHiW7ZHqMwalFvzpQr1lXs0cVbC1RZua1LnmRVOLAiEAoiZYv54JlcIF\nQs7SaETM1l/OCyefrQhJuP2oMgzvkXg=\n-----END CERTIFICATE-----\n"]
+            },
+            "httpOptions": {
+                "verify": false
+            }
+        }
+    }
+}
