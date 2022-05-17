@@ -80,7 +80,7 @@ tls:
 #############################################################################
 ca:
   # Name of this CA
-  name: OrdererCA
+  name: MaoriOrdererCA
   # Key file (is only used to import a private key into BCCSP)
   keyfile:
   # Certificate file (default: ca-cert.pem)
@@ -237,11 +237,11 @@ ldap:
 # which are always stored in lower case.
 #############################################################################
 affiliations:
-   org1:
-      - department1
+   Waka-district1:
+      - Landcourt
       - department2
-   org2:
-      - department1
+   Waka-district2:
+      - Landcourt
 
 #############################################################################
 #  Signing section

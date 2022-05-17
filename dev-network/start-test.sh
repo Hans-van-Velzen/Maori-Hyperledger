@@ -3,7 +3,7 @@ sudo systemctl enable docker
 
 cd ~/git/Maori-Hyperledger/dev-network/
 
-./network.sh up #createChannel # -ca # starts up with certificate authorities
+./network.sh up createChannel # -ca # starts up with certificate authorities
 ./network.sh createChannel #<channelname>
 
 # deploys a chaincode on the channel

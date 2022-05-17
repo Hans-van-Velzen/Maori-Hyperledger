@@ -80,7 +80,7 @@ tls:
 #############################################################################
 ca:
   # Name of this CA
-  name: Org1CA
+  name: Wakadistrict1CA
   # Key file (is only used to import a private key into BCCSP)
   keyfile:
   # Certificate file (default: ca-cert.pem)
@@ -237,11 +237,11 @@ ldap:
 # which are always stored in lower case.
 #############################################################################
 affiliations:
-   org1:
-      - department1
+   Waka-district1:
+      - Landcourt
       - department2
-   org2:
-      - department1
+   Waka-district2:
+      - Landcourt
 
 #############################################################################
 #  Signing section
@@ -301,16 +301,17 @@ signing:
 #     CA certificates though it can still issue end entity certificates.
 ###########################################################################
 csr:
-   cn: ca.org1.example.com
+   cn: ca.Waka-district1.example.com
    names:
-      - C: US
-        ST: "North Carolina"
-        L: "Durham"
-        O: org1.example.com
+      - C: Aotearoa
+        ST: "Takatimu"
+        L: "Hastings"
+        O: Waka-district1.example.com
         OU:
    hosts:
      - localhost
-     - org1.example.com
+     - Waka-district1.example.com
+     - Waka-district2.example.com
    ca:
       expiry: 131400h
       pathlength: 1
