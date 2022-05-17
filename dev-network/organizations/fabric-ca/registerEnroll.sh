@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function createOrg1() {
+function createWaka-district1() {
   infoln "Enrolling the CA admin"
   mkdir -p organizations/peerOrganizations/Waka-district1.example.com/
 
@@ -86,7 +86,7 @@ function createOrg1() {
   cp "${PWD}/organizations/peerOrganizations/Waka-district1.example.com/msp/config.yaml" "${PWD}/organizations/peerOrganizations/Waka-district1.example.com/users/Admin@Waka-district1.example.com/msp/config.yaml"
 }
 
-function createOrg2() {
+function createWaka-district2() {
   infoln "Enrolling the CA admin"
   mkdir -p organizations/peerOrganizations/Waka-district2.example.com/
 

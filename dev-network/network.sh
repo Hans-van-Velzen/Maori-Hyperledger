@@ -207,7 +207,7 @@ function createOrgs() {
 
     infoln "Creating Maori-Orderer Org Identities"
 
-    createOrderer
+    createMaoriOrderer
 
   fi
 
