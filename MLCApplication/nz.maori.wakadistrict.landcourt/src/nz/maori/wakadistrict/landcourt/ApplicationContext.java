@@ -7,9 +7,9 @@ class ApplicationContext extends Context {
 
     public ApplicationContext(ChaincodeStub stub) {
         super(stub);
-        this.contractList = new ContractList(this);
+        this.applicationList = new LCApplicationList(this);
     }
 
-    public ContractList contractList;
+    public LCApplicationList applicationList;
 
 }

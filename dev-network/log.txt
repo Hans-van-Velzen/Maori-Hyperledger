@@ -1,2 +1,0 @@
-Error: Post "https://localhost:7053/participation/v1/channels": dial tcp 127.0.0.1:7053: connect: connection refused
-
