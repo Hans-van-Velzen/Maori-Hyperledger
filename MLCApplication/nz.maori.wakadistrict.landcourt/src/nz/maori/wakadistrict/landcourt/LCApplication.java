@@ -34,7 +34,7 @@ public class LCApplication extends State implements ContractInterface {
 		return this;
 	}
     
-    public String getKey() {
+    private String getKey() {
 		return key;
 	}
 
@@ -43,17 +43,17 @@ public class LCApplication extends State implements ContractInterface {
 		return this;
 	}
 
-    public String getApplicationDetails() {
+    private String getApplicationDetails() {
 		return ApplicationDetails;
 	}
 
-    public String getState() {
-        return state;
-    }
-
-    public LCApplication setState(String state) {
+    private LCApplication setState(String state) {
         this.state = state;
         return this;
+    }
+
+    private String getState() {
+        return state;
     }
 
 

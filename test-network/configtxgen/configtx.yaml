@@ -25,7 +25,7 @@ Organizations:
         ID: OrdererMSP
 
         # MSPDir is the filesystem path which contains the MSP configuration
-        MSPDir: ../organizations/ordererOrganizations/orderer.maori/msp
+        MSPDir: ../organizations/ordererOrganizations/Maori-orderer.blockchain.maori/msp
 
         # Policies defines the set of policies at this level of the config tree
         # For organization policies, their canonical path is usually
@@ -43,60 +43,6 @@ Organizations:
 
         OrdererEndpoints:
             - orderer.example.com:7050
-
-    - &Waka-district1
-        # DefaultOrg defines the organization which is used in the sampleconfig
-        # of the fabric.git development environment
-        Name: Waka-district1MSP
-
-        # ID to load the MSP definition as
-        ID: Waka-district1MSP
-
-        MSPDir: ../organizations/peerOrganizations/waka1.maori/msp
-
-        # Policies defines the set of policies at this level of the config tree
-        # For organization policies, their canonical path is usually
-        #   /Channel/<Application|Orderer>/<OrgName>/<PolicyName>
-        Policies:
-            Readers:
-                Type: Signature
-                Rule: "OR('Waka-district1MSP.admin', 'Waka-district1MSP.peer', 'Waka-district1MSP.client')"
-            Writers:
-                Type: Signature
-                Rule: "OR('Waka-district1MSP.admin', 'Waka-district1MSP.client')"
-            Admins:
-                Type: Signature
-                Rule: "OR('Waka-district1MSP.admin')"
-            Endorsement:
-                Type: Signature
-                Rule: "OR('Waka-district1MSP.peer')"
-
-    - &Waka-district2
-        # DefaultOrg defines the organization which is used in the sampleconfig
-        # of the fabric.git development environment
-        Name: Waka-district2MSP
-
-        # ID to load the MSP definition as
-        ID: Waka-district2MSP
-
-        MSPDir: ../organizations/peerOrganizations/waka2.maori/msp
-
-        # Policies defines the set of policies at this level of the config tree
-        # For organization policies, their canonical path is usually
-        #   /Channel/<Application|Orderer>/<OrgName>/<PolicyName>
-        Policies:
-            Readers:
-                Type: Signature
-                Rule: "OR('Waka-district2MSP.admin', 'Waka-district2MSP.peer', 'Waka-district2MSP.client')"
-            Writers:
-                Type: Signature
-                Rule: "OR('Waka-district2MSP.admin', 'Waka-district2MSP.client')"
-            Admins:
-                Type: Signature
-                Rule: "OR('Waka-district2MSP.admin')"
-            Endorsement:
-                Type: Signature
-                Rule: "OR('Waka-district2MSP.peer')"
 
 ################################################################################
 #
@@ -167,8 +113,8 @@ Application: &ApplicationDefaults
     # Organizations is the list of orgs which are defined as participants on
     # the application side of the network
     Organizations:
-    	- *Waka-district1
-    	- *Waka-district2
+#        - *Waka-district1
+#        - *Waka-district2
 
     # Policies defines the set of policies at this level of the config tree
     # For Application policies, their canonical path is
@@ -216,9 +162,9 @@ Orderer: &OrdererDefaults
         Consenters:
         - Host: Maori-orderer.example.com
           Port: 7050
-          ClientTLSCert: ../organizations/ordererOrganizations/example.com/orderers/Maori-orderer.example.com/tls/server.crt
-          ServerTLSCert: ../organizations/ordererOrganizations/example.com/orderers/Maori-orderer.example.com/tls/server.crt
-
+          ClientTLSCert: ../organizations/ordererOrganizations/Maori-orderer.blockchain.maori/tls/server.crt
+          ServerTLSCert: ../organizations/ordererOrganizations/Maori-orderer.blockchain.maori/tls/server.crt
+#../organizations/ordererOrganizations/blockchain.maori/msp/cacerts
     # Batch Timeout: The amount of time to wait before creating a batch
     BatchTimeout: 2s
 
@@ -302,7 +248,7 @@ Channel: &ChannelDefaults
 ################################################################################
 Profiles:
 
-    TwoOrgsApplicationGenesis:
+    WakaApplicationGenesis:
         <<: *ChannelDefaults
         Orderer:
             <<: *OrdererDefaults
@@ -312,15 +258,13 @@ Profiles:
         Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *Waka-district1
-                - *Waka-district2
+#                - *Waka-district1
+#                - *Waka-district2
             Capabilities: *ApplicationCapabilities
     MLCChannel:
-    	Consortium: MLC
-    	Application:
+#    Consortium: MLC
+    Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *Waka-district1
-                - *Waka-district2
-    	
-
+#                - *Waka-district1
+#                - *Waka-district2
