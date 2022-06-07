@@ -42,7 +42,8 @@ Organizations:
                 Rule: "OR('OrdererMSP.admin')"
 
         OrdererEndpoints:
-            - orderer.example.com:7050
+            - orderer.example.com:7055
+#            - orderer.example.com:7050
 
 ################################################################################
 #
@@ -156,12 +157,14 @@ Orderer: &OrdererDefaults
     # as TLS validation.  The preferred way to specify orderer addresses is now
     # to include the OrdererEndpoints item in your org definition
     Addresses:
-        - orderer.example.com:7050
+        - orderer.example.com:7055
+#        - orderer.example.com:7050
 
     EtcdRaft:
         Consenters:
         - Host: Maori-orderer.example.com
-          Port: 7050
+          Port: 7055
+#          Port: 7050
           ClientTLSCert: ../organizations/ordererOrganizations/Maori-orderer.blockchain.maori/tls/server.crt
           ServerTLSCert: ../organizations/ordererOrganizations/Maori-orderer.blockchain.maori/tls/server.crt
 #../organizations/ordererOrganizations/blockchain.maori/msp/cacerts
@@ -261,9 +264,14 @@ Profiles:
 #                - *Waka-district1
 #                - *Waka-district2
             Capabilities: *ApplicationCapabilities
+        Consortiums:
+            MLCConsortium:
+                Organisations:
+
     MLCChannel:
-#    Consortium: MLC
-    Application:
+        <<: *ChannelDefaults
+        Consortium: MLCConsortium
+        Application:
             <<: *ApplicationDefaults
             Organizations:
 #                - *Waka-district1

@@ -1,2 +1,2 @@
 
-configtxgen -outputBlock ./waka-genesis.block -profile WakaApplicationGenesis -channelId ordererchannel
+configtxgen -outputBlock ./waka-genesis.block -profile WakaApplicationGenesis -channelID ordererchannel -configPath .
