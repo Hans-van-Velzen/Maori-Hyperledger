@@ -1,1 +1,10 @@
 test-network/ledgers/*
+# Exclude all certificate data as this is generated anyway
+*.pem
+*.crt
+*.key
+# Exclude the eventual ledgers
+*.tx
+*.block
+# Exclude all log files.
+*.log
