@@ -7,9 +7,10 @@ BASE_CONFIG_DIR=./setup/config
 if [ ! -z $1 ]; then
     if [ $1 == "all" ]; then
 
-        cp $BASE_CONFIG_DIR/crypto-config-Waka-district1.yaml ./config
-        cp $BASE_CONFIG_DIR/crypto-config-Waka-district2.yaml ./config
-        echo    'Copied: crypto-config*.yaml, configtx & orderer YAML files.'
+        cp $BASE_CONFIG_DIR/crypto-config-Waka-district1.yaml ./config-peers
+        cp $BASE_CONFIG_DIR/crypto-config-Waka-district2.yaml ./config-peers
+        cp $BASE_CONFIG_DIR/core.yaml ./config-peers
+        echo    'Copied: crypto-config*.yaml; core.yaml files.'
         
     fi
 else
@@ -19,6 +20,6 @@ fi
 #3. Setup cryptogen for peers
 echo    '================ Generating crypto-config ================'
 rm -rf ./crypto-config/peerOrganizations 2> /dev/null
-cryptogen extend --config=./config/crypto-config-Waka-district1.yaml
-cryptogen extend --config=./config/crypto-config-Waka-district2.yaml
+cryptogen extend --config=./config-peers/crypto-config-Waka-district1.yaml
+cryptogen extend --config=./config-peers/crypto-config-Waka-district2.yaml
 
