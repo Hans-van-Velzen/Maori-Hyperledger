@@ -1,4 +1,4 @@
-test-network/ledgers/*
+test-network/ledgers/**
 # Exclude all certificate data as this is generated anyway
 *.pem
 *.crt
