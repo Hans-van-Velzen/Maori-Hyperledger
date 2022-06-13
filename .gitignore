@@ -6,5 +6,8 @@ test-network/ledgers/**
 # Exclude the eventual ledgers
 *.tx
 *.block
+# Exclude wallet information
+*.wal
 # Exclude all log files.
 *.log
+**/priv_sk

@@ -1,0 +1,77 @@
+###############################################################################
+#
+#    Peer section
+#
+###############################################################################
+peer:
+
+    # The peer id provides a name for this peer instance and is used when naming docker resources.
+    id: waka1_peer0
+
+    # The networkId allows for logical separation of networks and is used when naming docker resources.
+    networkId: dev
+
+    # The Address at local network interface this Peer will listen on.
+    listenAddress: 0.0.0.0:7051
+
+    # The endpoint this peer uses to listen for inbound chaincode connections.
+    chaincodeListenAddress: 0.0.0.0:7052
+
+    # The endpoint the chaincode for this peer uses to connect to the peer.
+    chaincodeAddress: 127.0.0.1:7052
+
+    # When used as peer config, this represents the endpoint to other peers in the same organization. 
+    # When used as CLI config, this means the peer's endpoint to interact with
+    address: 127.0.0.1:7051
+
+    # Whether the Peer should programmatically determine its address
+    addressAutoDetect: false
+
+    # Settings for the Peer's gateway server.
+    gateway:
+        # Whether the gateway is enabled for this Peer.
+        enabled: true
+        # endorsementTimeout is the duration the gateway waits for a response from other endorsing peers before returning a timeout error to the client.
+        endorsementTimeout: 30s
+        # dialTimeout is the duration the gateway waits for a connection to other network nodes.
+        dialTimeout: 2m
+
+    # Keepalive settings for peer server and clients
+    keepalive:
+        # Interval is the duration after which if the server does not see any activity from the client it pings the client to see if it's alive
+        interval: 7200s
+        # Timeout is the duration the server waits for a response from the client after sending a ping before closing the connection
+        timeout: 20s
+        # MinInterval is the minimum permitted time between client pings.
+        minInterval: 60s
+        # Client keepalive settings for communicating with other peer nodes
+        client:
+            # Interval is the time between pings to peer nodes. This must be greater than or equal to the minInterval specified by peer nodes
+            interval: 60s
+            # Timeout is the duration the client waits for a response from peer nodes before closing the connection
+            timeout: 20s
+        # DeliveryClient keepalive settings for communication with ordering nodes.
+        deliveryClient:
+            # Interval is the time between pings to ordering nodes. This must be greater than or equal to the minInterval specified by ordering nodes.
+            interval: 60s
+            # Timeout is the duration the client waits for a response from ordering nodes before closing the connection
+            timeout: 20s
+
+    # MSP Section
+    # Identifier of the local MSP
+    # ----!!!!IMPORTANT!!!-!!!IMPORTANT!!!-!!!IMPORTANT!!!!----
+    # Deployers need to change the value of the localMspId string.
+    # In particular, the name of the local MSP ID of a peer needs
+    # to match the name of one of the MSPs in each of the channel
+    # that this peer is a member of. Otherwise this peer's messages
+    # will not be identified as valid by other nodes.
+    localMspId: Waka1OrgMSP
+
+    # Path on the file system where peer will find MSP local configurations
+    mspConfigPath: /home/hyperdev/git/Maori-Hyperledger/test-network/crypto-config/peerOrganizations/waka1.maori/peers/peer0.waka1.maori
+
+    # Filesystem parameters
+    # Path on the file system where peer will store data (eg ledger). This location must be access control protected to prevent unintended
+    # modification that might corrupt the peer operations.
+    fileSystemPath: /home/hyperdev/git/Maori-Hyperledger/test-network/ledgers/peer/waka1/maori-blockchain/ledger
+
