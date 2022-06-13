@@ -8,6 +8,7 @@ test-network/ledgers/**
 *.block
 # Exclude wallet information
 *.wal
+*.tmp
 # Exclude all log files.
 *.log
 **/priv_sk
