@@ -86,7 +86,7 @@ public class StateListImpl implements StateList {
      * Update a state in the list. Puts the new state in world state with
      * appropriate composite key. Note that state defines its own key. A state is
      * serialized before writing. Logic is very similar to addState() but kept
-     * separate becuase it is semantically distinct.
+     * separate because it is semantically distinct.
      */
     @Override
     public StateList updateState(State state) {

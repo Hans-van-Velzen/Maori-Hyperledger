@@ -1,0 +1,35 @@
+---
+name: dev-network-waka${ORG}
+version: 1.0.0
+client:
+  organization: Waka${ORG}
+  connection:
+    timeout:
+      peer:
+        endorser: '300'
+organizations:
+  Org${ORG}:
+    mspid: Waka${ORG}MSP
+    peers:
+    - peer0.waka${ORG}.maori
+    certificateAuthorities:
+    - ca.waka${ORG}.maori
+peers:
+  peer0.waka${ORG}.maori:
+    url: grpcs://localhost:${P0PORT}
+    tlsCACerts:
+      pem: |
+          ${PEERPEM}
+    grpcOptions:
+      ssl-target-name-override: peer0.waka${ORG}.maori
+      hostnameOverride: peer0.waka${ORG}.maori
+certificateAuthorities:
+  ca.org${ORG}.example.com:
+    url: https://localhost:${CAPORT}
+    caName: ca-waka${ORG}.maori
+    tlsCACerts:
+      pem: 
+        - |
+          ${CAPEM}
+    httpOptions:
+      verify: false

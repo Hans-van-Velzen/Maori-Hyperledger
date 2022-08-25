@@ -6,7 +6,12 @@ import java.util.logging.Logger;
 
 import org.hyperledger.fabric.contract.Context;
 import org.hyperledger.fabric.contract.ContractInterface;
+import org.hyperledger.fabric.contract.annotation.Contact;
+import org.hyperledger.fabric.contract.annotation.Contract;
 import org.hyperledger.fabric.contract.annotation.DataType;
+import org.hyperledger.fabric.contract.annotation.Default;
+import org.hyperledger.fabric.contract.annotation.Info;
+import org.hyperledger.fabric.contract.annotation.License;
 import org.hyperledger.fabric.contract.annotation.Property;
 import org.hyperledger.fabric.contract.annotation.Transaction;
 import org.hyperledger.fabric.shim.ChaincodeStub;
@@ -35,7 +40,7 @@ public class LCApplication extends State implements ContractInterface {
 	}
     
     private String getKey() {
-		return key;
+		return this.key;
 	}
 
     private LCApplication setApplicationDetails(String _applicationDetails) {
@@ -44,7 +49,7 @@ public class LCApplication extends State implements ContractInterface {
 	}
 
     private String getApplicationDetails() {
-		return ApplicationDetails;
+		return this.ApplicationDetails;
 	}
 
     private LCApplication setState(String state) {
@@ -53,7 +58,7 @@ public class LCApplication extends State implements ContractInterface {
     }
 
     private String getState() {
-        return state;
+        return this.state;
     }
 
 
@@ -92,21 +97,39 @@ public class LCApplication extends State implements ContractInterface {
     // The actual methods / transactions
     // * LodgeLCApplication
     // * UpdateLCApplicationStatus
-    @Transaction
-    public void LodgeLCApplication (ApplicationContext ctx, String Application) {
-    	// create an instance of a LCApplication
-    	// generate the correct Key
-    	LCApplication application = LCApplication.createInstance(key, Application, null);
+    @Transaction(intent = Transaction.TYPE.SUBMIT)
+    public void LodgeLCApplication (ApplicationContext ctx, String _key, String _applicationDetails) {
+    	// Check if this application already exists
+    	// If not, create an instance of a LCApplication
+    	// For a newly lodged application, the state will be LODGED.
+    	LCApplication application = LCApplication.createInstance(_key, _applicationDetails, LODGED);
     	
         // Add the application to the list of all similar applications in the 
     	// ledger world state
-    	//ctx.LCApplicationList.addApplication(application);
+    	ctx.applicationList.addApplication(application);
     }
 
-    @Transaction
-    public void UpdateLCApplicationStatus (ApplicationContext ctx, String Application, String newStatus) {
-    	
+    @Transaction(intent = Transaction.TYPE.SUBMIT)
+    public void UpdateLCApplicationStatus (ApplicationContext ctx, String _key, String _newState) {
+    	// Do not reset to Lodged
+    	if (_newState == LODGED) {
+    		return; // raise - not allowed to reset to lodged
+    	}
+    	if (_newState != ACCEPTED && _newState != REFUSED) {
+    		return; // raise - unknown state
+    	}    	
+    	// find if the application exists.
+    	LCApplication application = ctx.applicationList.getApplication(_key);
+    	if (application == null) {
+    		return ; // 'error'; raise error -- application not found
+    	}    	
+    	application.setState(_newState);
     }
+    
+//    @Transaction(intent = Transaction.TYPE.EVALUATE)
+//    public String getApplication(final ApplicationContext ctx, final String ID) {
+//    	LCApplication applic = getState
+//    }
     
     /**
      * Deserialize a state data to commercial paper

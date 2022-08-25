@@ -247,17 +247,23 @@ function networkUp() {
 
   # generate artifacts if they don't exist
   if [ ! -d "organizations/peerOrganizations" ]; then
+  infoln "create orgs"
     createOrgs
   fi
 
   COMPOSE_FILES="-f compose/${COMPOSE_FILE_BASE} -f compose/${CONTAINER_CLI}/${CONTAINER_CLI}-${COMPOSE_FILE_BASE}"
 
+  infoln ${COMPOSE_FILES}
+
   if [ "${DATABASE}" == "couchdb" ]; then
     COMPOSE_FILES="${COMPOSE_FILES} -f compose/${COMPOSE_FILE_COUCH} -f compose/${CONTAINER_CLI}/${CONTAINER_CLI}-${COMPOSE_FILE_COUCH}"
   fi
 
+  infoln "starting docker: ${DOCKER_SOCK}  ${CONTAINER_CLI_COMPOSE} ${COMPOSE_FILES}"
+
   DOCKER_SOCK="${DOCKER_SOCK}" ${CONTAINER_CLI_COMPOSE} ${COMPOSE_FILES} up -d 2>&1
 
+  infoln "$CONTAINER_CLI"
   $CONTAINER_CLI ps -a
   if [ $? -ne 0 ]; then
     fatalln "Unable to start network"
@@ -329,6 +335,7 @@ function networkDown() {
   COMPOSE_ORG3_FILES="${COMPOSE_ORG3_BASE_FILES} ${COMPOSE_ORG3_COUCH_FILES} ${COMPOSE_ORG3_CA_FILES}"
 
   if [ "${CONTAINER_CLI}" == "docker" ]; then
+    infoln "$DOCKER_SOCK ${CONTAINER_CLI_COMPOSE} ${COMPOSE_FILES} ${COMPOSE_ORG3_FILES}"
     DOCKER_SOCK=$DOCKER_SOCK ${CONTAINER_CLI_COMPOSE} ${COMPOSE_FILES} ${COMPOSE_ORG3_FILES} down --volumes --remove-orphans
   elif [ "${CONTAINER_CLI}" == "podman" ]; then
     ${CONTAINER_CLI_COMPOSE} ${COMPOSE_FILES} ${COMPOSE_ORG3_FILES} down --volumes
@@ -340,7 +347,7 @@ function networkDown() {
   # Don't remove the generated artifacts -- note, the ledgers are always removed
   if [ "$MODE" != "restart" ]; then
     # Bring down the network, deleting the volumes
-    ${CONTAINER_CLI} volume rm docker_orderer.example.com docker_peer0.Waka-district1.example.com docker_peer0.Waka-district2.example.com
+    ${CONTAINER_CLI} volume rm maori-orderer.blockchain.maori peer0.Waka-district1.blockchain.maori peer0.Waka-district2.blockchain.maori
     #Cleanup the chaincode containers
     clearContainers
     #Cleanup images

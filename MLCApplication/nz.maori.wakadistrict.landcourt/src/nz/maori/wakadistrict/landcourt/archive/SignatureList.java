@@ -1,4 +1,4 @@
-package nz.maori.wakadistrict.landcourt;
+package nz.maori.wakadistrict.landcourt.archive;
 
 import java.util.List;
 

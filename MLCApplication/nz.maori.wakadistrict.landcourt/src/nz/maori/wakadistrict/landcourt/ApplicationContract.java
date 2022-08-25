@@ -10,6 +10,7 @@ import org.hyperledger.fabric.contract.annotation.Contract;
 import org.hyperledger.fabric.contract.annotation.Default;
 import org.hyperledger.fabric.contract.annotation.Info;
 import org.hyperledger.fabric.contract.annotation.License;
+import org.hyperledger.fabric.contract.annotation.Property;
 import org.hyperledger.fabric.contract.annotation.Transaction;
 import org.hyperledger.fabric.shim.ChaincodeStub;
 
@@ -17,21 +18,27 @@ import org.hyperledger.fabric.shim.ChaincodeStub;
 @Default
 public class ApplicationContract implements ContractInterface {
 
+	@Property()
+	private LCApplicationList applications;
+//	@Property()
+//	private Context ctx;
+	
     // use the classname for the logger, this way you can refactor
     private final static Logger LOG = Logger.getLogger(ApplicationContract.class.getName());
 
+    /**
+     * Define a custom context for the landcourt application
+     */
     @Override
     public Context createContext(ChaincodeStub stub) {
         return new ApplicationContext(stub);
     }
     
+    // constructor --> create an empty applicationList
     public ApplicationContract() {
-
+//    	this.ctx = createContext(null);
+//    	this.applications = new LCApplicationList(ctx);
     }
-
-    /**
-     * Define a custom context for the landcourt application
-     */
 
     /**
      * Instantiate to perform any setup of the ledger that might be required.
@@ -55,7 +62,9 @@ public class ApplicationContract implements ContractInterface {
      * @param {String} maturityDateTime paper maturity date
      * @param {Integer} faceValue face value of paper
      */
-    //@Transaction
-
+    @Transaction(intent = Transaction.TYPE.SUBMIT)
+    public void LodgeLCApplication (ApplicationContext ctx, String _key, String _applicationDetails) {
+    	// create an instance of a LC Application
+    }
 
 }
